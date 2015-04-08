@@ -24,7 +24,7 @@ in defs.zm
 
 You can highlight the regions of interest (default configured to overlap with pictures) by setting
  `SHOW_REGION_OF_INTEREST = true;`
-in defs.zm. This allows you to double check if they are what you expect them too be.
+in defs.zm. This allows you to double check if they are what you expect them to be.
 
 #Screencaptures for postprocessing
 To generate pictures of the screen for region-of-interest selection run
