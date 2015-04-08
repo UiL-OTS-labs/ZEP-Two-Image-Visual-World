@@ -1,0 +1,18 @@
+   ### Test phase items ###
+index;id;type;target_onset;image_filename;sound_filename;record_eye_movements;do_drift_check
+0;1;CNDA;0;"apple.png";"appels.wav";true;true
+1;1;CNDB;0;"drill.png";"appels.wav";true;true
+2;1;CNDC;0;"hammer.png";"appels.wav";true;true
+3;1;CNDD;0;"lemon.png";"appels.wav";true;true
+0;2;CNDD;0;"drill.png";"bomen.wav";true;true
+1;2;CNDA;0;"apple.png";"bomen.wav";true;true
+2;2;CNDB;0;"hammer.png";"bomen.wav";true;true
+3;2;CNDC;0;"lemon.png";"bomen.wav";true;true
+0;3;FILL;0;"apple.png";"fiets.wav";false;true
+1;3;FILL;0;"apple.png";"fiets.wav";false;true
+2;3;FILL;0;"apple.png";"fiets.wav";false;true
+3;3;FILL;0;"apple.png";"fiets.wav";false;true
+0;4;FILL;0;"hammer.png";"tuinman.wav";false;true
+1;4;FILL;0;"hammer.png";"tuinman.wav";false;true
+2;4;FILL;0;"hammer.png";"tuinman.wav";false;true
+3;4;FILL;0;"hammer.png";"tuinman.wav";false;true
