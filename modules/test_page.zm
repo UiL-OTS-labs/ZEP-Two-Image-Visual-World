@@ -187,8 +187,8 @@ Page test_page
                 {
                     regions.size = 2;
                     response_codes.size = 2;
-                    regions[0] = region1; response_codes[0] = 0;
-                    regions[1] = region2; response_codes[1] = 1;
+                    regions[0] = region1; response_codes[0] = 1;
+                    regions[1] = region2; response_codes[1] = 2;
                 }
 
                 void highlight_regions()
@@ -381,8 +381,10 @@ Page test_page
         // Enable button-box buttons.
         control.target = this;
         control.button_box.disable_buttons();
-        control.button_box.enable_all_buttons(1);
         
+        control.button_box.enable_button(0,1);
+        control.button_box.enable_button(0,2);
+
         if(!allow_selection_by_mouse())
             hide_cursor();
     }

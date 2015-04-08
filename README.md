@@ -9,6 +9,8 @@ is displayed and an utterance relating to the scene is played.
 Participant's task is to carefully look and listen. Self-paced. 
 Output: Eye-Tracking data as collected by the eye-tracker.
 
+Current-button setup is that left shift selects left item whereas right shift slects right item.
+
 #Pseudorandomisation
 Current pseudorandomisation rules:
 * First item must be a filler item.
