@@ -12,7 +12,8 @@ record TestOutput
     bool        did_drift_check;
     string      sound_filename;          // sound stimulus filename
     int         target_onset;       // onset of target in sentence
-    string      image_filename;         // image stimulus filename 1
+    string      image_filename1;         // image stimulus filename 1
+    string      image_filename2;         // image stimulus filename 1
     int         value;          // response value: 1=L,2=R,-1=timeout
     int         rt;             // response time [ms]
 }

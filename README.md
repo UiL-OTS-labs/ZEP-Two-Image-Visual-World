@@ -1,5 +1,5 @@
 #Experiment:
-Single Image Visual World
+Two Image Visual World
 
 #Description:
 Purpose of this experiment is to record participant's eye-movements

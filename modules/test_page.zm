@@ -145,9 +145,28 @@ Page test_page
                     }
                 }
 
+                 CanvasGadget image2canvas
+                {
+                    init()
+                    {
+                        size = 400, 400;
+                        offset_x = floor(width / 2);
+                        offset_y = floor(height / 2);
+                    }
+
+                    ImageShape image2
+                    {
+                        init()
+                        {
+                            is_visible=true;
+                        }
+                    }
+                }
+
                 void load_all_images(string[] filenames)
                 {
-                    load_image(image1canvas.image1, filenames[CENTER]);
+                    load_image(image1canvas.image1, filenames[LEFT]);
+                    load_image(image2canvas.image2, filenames[RIGHT]);
                 }
 
                 void load_image(ImageShape target_image, string filename)
@@ -166,9 +185,10 @@ Page test_page
 
                 init()
                 {
-                    regions.size = 1;
-                    response_codes.size = 1;
-                    regions[0] = region1; response_codes[0] = 1;
+                    regions.size = 2;
+                    response_codes.size = 2;
+                    regions[0] = region1; response_codes[0] = 0;
+                    regions[1] = region2; response_codes[1] = 1;
                 }
 
                 void highlight_regions()
@@ -184,10 +204,12 @@ Page test_page
                 }
 
                 CanvasGadget region1 {}
+                CanvasGadget region2 {}
 
                 void reload()
                 {
                     copy_properties_from_to(stimuli.image1canvas, region1);
+                     copy_properties_from_to(stimuli.image2canvas, region2);
                 }
 
                 void copy_properties_from_to(GuiItem source, GuiItem target)
@@ -205,12 +227,12 @@ Page test_page
 
                 // Prepare stimulus presentation objects.
                 string[..] filenames;
-                filenames.size = 1;
-                filenames[CENTER] = item.image_filename;
+                filenames.size = 2;
+
+                filenames[LEFT] = item.image_filename1;
+                filenames[RIGHT] = item.image_filename2;
 
                 stimuli.load_all_images(filenames);
-
-                //load_image_into(stimuli_dir() + "images/" + item.image_filename, stimulus_layers.stimulus);
  
                 regions_of_interests.reload();
                 regions_of_interests.start(t);
@@ -447,7 +469,7 @@ Page test_page
         test_page_overlay.update_progress_bar(count);
 
         // Update status line on control window. Cleared in done() above.
-        control.set_status(string(item.id) + "  " + string(item.sound_filename) + "  " + string(item.image_filename));
+        control.set_status(string(item.id) + "  " + string(item.sound_filename) + "  " + string(item.image_filename1) + "  " + string(item.image_filename2));
 
         // Remember who to signal when the trial is over.
         target = caller;

@@ -31,7 +31,8 @@ enum ItemType
 
 enum ScreenLocation
 {
-   CENTER
+   LEFT,
+   RIGHT
 }
 
 // Item record used for the test phase item table.
@@ -40,7 +41,8 @@ record TestItem
     int      id;             // item id
     ItemType    type;           // item type
     int             target_onset;      
-    string      image_filename;          // image stimulus filename
+    string      image_filename1;          // image stimulus filename
+    string      image_filename2;          // image stimulus filename
     string      sound_filename;          // sound stimulus filename
     bool        record_eye_movements;         // if set, record eye movements
     bool        do_drift_check;       // if set, perform drift check
@@ -80,12 +82,18 @@ int all_items_files_exists(TestItem[] items)
     {
         TestItem item = items[index];
         
-        string full_path_to_image = stimuli_dir() + "images/" + item.image_filename;
+        string full_path_to_image1 = stimuli_dir() + "images/" + item.image_filename1;
+        string full_path_to_image2 = stimuli_dir() + "images/" + item.image_filename2;
         string full_path_to_sound = stimuli_dir() + "sounds/" + item.sound_filename;
 
-        if(!file_exists(full_path_to_image))
+        if(!file_exists(full_path_to_image1))
         {
-            println("ERROR: could not locate " + full_path_to_image);
+            println("ERROR: could not locate " + full_path_to_image1);
+             return ERROR;
+        }
+        if(!file_exists(full_path_to_image2))
+        {
+            println("ERROR: could not locate " + full_path_to_image2);
              return ERROR;
         }
         if(!file_exists(full_path_to_sound))

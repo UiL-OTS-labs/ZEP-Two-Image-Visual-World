@@ -54,6 +54,6 @@ const dur       RESPONSE_SHIFT                  = -100ms;
 //const dur       RESPONSE_DURATION               = 5000ms;       // auto-paced
 const dur       RESPONSE_DURATION               = 0ms;          // self-paced
 
-const bool	SELECT_ITEMS_BY_MOUSE = true;
+const bool	SELECT_ITEMS_BY_MOUSE = false;
 
-const bool	HIGHLIGHT_REGION_OF_INTEREST = true;
+const bool	HIGHLIGHT_REGION_OF_INTEREST = false;
