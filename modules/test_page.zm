@@ -383,7 +383,7 @@ Page test_page
         control.button_box.disable_buttons();
         
         control.button_box.enable_button(0,1);
-        control.button_box.enable_button(0,2);
+        control.button_box.enable_button(2,2);
 
         if(!allow_selection_by_mouse())
             hide_cursor();
