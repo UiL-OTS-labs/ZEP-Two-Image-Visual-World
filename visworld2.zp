@@ -77,8 +77,8 @@ Experiment experiment
 
     void setup_button_box()
     {
-        control.button_box.open();
-        control.button_box.output(0x02); // If necessary set parallel port line D0 to power button box device (required on most new systems)
+        control.button_box.open("/dev/ttyACM0");
+         // If necessary set parallel port line D0 to power button box device (required on most new systems)
     }
 
     on_event:message()
