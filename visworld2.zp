@@ -173,7 +173,7 @@ Experiment experiment
             {
                 on_event:entry()
                 {
-                    test_page.action(this, current_item, reference_time, test.cycle);
+                    test_page.action(this, current_item, reference_time, practice.cycle);
                 }
             }
 
@@ -269,6 +269,7 @@ Experiment experiment
 
                 //test specific output:
                 current_output.value = test_page.response.value;
+                current_output.correct = test_page.response.correct;
                 current_output.rt = test_page.response.rt;
 
                 test_output_append(current_output);
