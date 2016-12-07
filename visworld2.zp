@@ -60,8 +60,9 @@ import std_sound_output_device;
 
 //specials:
 import texts_en;
-import eyetracker_eyelink;
+//import eyetracker_eyelink;
 //import eyetracker_tobii;
+import eyetracker_smi;
 import test_page;
 
 
