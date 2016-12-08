@@ -27,7 +27,7 @@ import std_sound_playback;
 enum EyeTrkMessage
 {
     DRIFT_CHECK_DONE,
-    RECALBIRATE,
+    RECALIBRATE,
     RECORDING_DONE,
 }
 
@@ -176,7 +176,7 @@ EyeLinkEyeTracker eyetracker
         // Kill any sound if still playing.
         sound_playback.abort();
 
-        signal_target(RECALBIRATE);
+        signal_target(RECALIBRATE);
     }
 
 
@@ -185,7 +185,7 @@ EyeLinkEyeTracker eyetracker
         // Kill any sound if still playing.
         sound_playback.abort();
 
-        signal_target(RECALBIRATE);
+        signal_target(RECALIBRATE);
     }
 
 

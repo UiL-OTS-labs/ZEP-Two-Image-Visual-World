@@ -37,29 +37,35 @@ SmiEyeTracker eyetracker
 
         // The following attributes define appearance of calibration targets.
 
-//        wakeup_target_duration          = 1000ms;
-//        focus_target_duration           = 500ms;
+        wakeup_target_duration          = 1000ms;
+        focus_target_duration           = 500ms;
 
 //        default_target_line_color       = color:black;
 //        default_target_color            = color:red;
 //        wakeup_target_color             = color:yellow;
 
-//        min_target_size                 = 10;
-//        max_target_size                 = 100;
-//        setup_target_size               = 100;
-//        target_size_mod                 = 0.2;
+        attention_target_image          = zep_dir() + "data/images/teddy.svg";
+        focus_target_image              = zep_dir() + "data/images/teddy.svg";
+        wakeup_target_image             = zep_dir() + "data/images/sun.svg";
+
+        cross_fade_focus_target         = false;
+
+        min_target_size                 = 10;
+        max_target_size                 = 100;
+        setup_target_size               = 100;
+        target_size_mod                 = 0.2;
 //        target_size_mod_freq            = 1;
 //        target_wiggle_mod               = 0.05;
 //        target_wiggle_mod_freq          = 4;
 
-//        simulated_gaze_noise            = 0.01;
+        simulated_gaze_noise            = 0.01;
     }
 
 
     on_event:connected()
     {
         // Calibration type.
-        calibration_type                = CALIB_TYPE_13;
+        calibration_type                = CALIB_TYPE_5A;
 
         // For infants you may want to trigger calibration targets manually.
 //        manual_calibration              = false;
