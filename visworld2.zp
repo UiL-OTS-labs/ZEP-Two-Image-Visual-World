@@ -63,11 +63,11 @@ import std_sound_output_device;
 
 //specials:
 import texts_en;
-import eyetracker_eyelink;
+//import eyetracker_eyelink;
 //import eyetracker_eyelink_infant;
 //import eyetracker_tobii;
 //import eyetracker_smi;
-//import eyetracker_smi_infant;
+import eyetracker_smi_infant;
 import test_page;
 
 
