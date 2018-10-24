@@ -47,7 +47,7 @@ HISTORY:
 
 \******************************************************************************/
 
-requires 1.14;
+requires 1.16;
 
 //standards:
 // Defaultly import std_windows1, but import std_windows1a when using the smi.
