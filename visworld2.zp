@@ -129,7 +129,10 @@ Experiment experiment
             experiment.open_data_file();
 
             num_cycles = test_prac_items.size;
-            test_page.setup(num_cycles);
+            // Enable progress bar
+            //test_page.setup(num_cycles);
+            // Disable progress bar
+            test_page.setup(-1);
         }
 
         on_event:exit()
@@ -223,7 +226,10 @@ Experiment experiment
             experiment.open_data_file();
 
             num_cycles = test_items[selected_group].size;
-            test_page.setup(num_cycles);
+            // Enable progress bar
+            //test_page.setup(num_cycles);
+            // Disable progress bar
+            test_page.setup(-1);
         }
 
         on_event:exit()
