@@ -54,15 +54,15 @@ Page test_page
 
     void handle_eyetracker_message()
     {
-            if (message_arg == DRIFT_CHECK_DONE)
-                start_actual_presentation();
-            else if (message_arg == RECALIBRATE)
-                cancel_to_recalibrate();
+        if (message_arg == DRIFT_CHECK_DONE)
+            start_actual_presentation();
+        else if (message_arg == RECALIBRATE)
+            cancel_to_recalibrate();
     }
 
     void handle_control_message()
     {
-            response.process_hit(message_arg, event_time);
+        response.process_hit(message_arg, event_time);
     }
 
     void handle_mouse_click(int x, int y, time time_reference)
@@ -90,177 +90,177 @@ Page test_page
 
     StackLayout layout
     {
-            int get_mid_x_coor()
+        int get_mid_x_coor()
+        {
+            return stimuli.x_abs+(stimuli.actual_width/2); 
+        }
+
+        int get_mid_y_coor()
+        {
+            return stimuli.y_abs+(stimuli.actual_height/2); 
+        }
+
+        VerticalLayout background
+        {
+            CanvasGadget
             {
-                return stimuli.x_abs+(stimuli.actual_width/2); 
-            }
-
-            int get_mid_y_coor()
-            {
-                return stimuli.y_abs+(stimuli.actual_height/2); 
-            }
-
-            VerticalLayout background
-            {
-                CanvasGadget
-                {
-                    init()
-                    {
-                        fill_pattern_color = color:white;
-                        size = 800, 800;
-                    }
-                }
-            }
-
-            HorGridLayout stimuli
-            {
-                 init()
-                {
-                    wrap_count = 2;
-                    is_visible = false;
-                }
-
-                 on_event:start()
-                {
-                    regions_of_interests.reload();
-                    int dt = int(now() - start_time);
-                    eyetracker.print_to_data_file(start_time, "SYNCTIME " + string(dt));
-                    eyetracker.print_to_data_file(start_time, string(dt) + " DISPLAY ON");
-                }
-
-                 CanvasGadget image1canvas
-                {
-                    init()
-                    {
-                        size = 400, 400;
-                        offset_x = floor(width / 2);
-                        offset_y = floor(height / 2);
-                    }
-
-                    ImageShape image1
-                    {
-                        init()
-                        {
-                            is_visible=true;
-                        }
-                    }
-                }
-
-                 CanvasGadget image2canvas
-                {
-                    init()
-                    {
-                        size = 400, 400;
-                        offset_x = floor(width / 2);
-                        offset_y = floor(height / 2);
-                    }
-
-                    ImageShape image2
-                    {
-                        init()
-                        {
-                            is_visible=true;
-                        }
-                    }
-                }
-
-                void load_all_images(string[] filenames)
-                {
-                    load_image(image1canvas.image1, filenames[LEFT]);
-                    load_image(image2canvas.image2, filenames[RIGHT]);
-                }
-
-                void load_image(ImageShape target_image, string filename)
-                {
-                    target_image.image = stimuli_dir() + "/images/" + filename;
-
-                    target_image.x = floor(-target_image.actual_width / 2);
-                    target_image.y = floor(-target_image.actual_height / 2);
-                }
-            }
-
-            FreeLayout regions_of_interests
-            {
-                CanvasGadget[..] regions;
-                int[..] response_codes;
-
                 init()
                 {
-                    regions.size = 2;
-                    response_codes.size = 2;
-                    regions[0] = region1; response_codes[0] = 1;
-                    regions[1] = region2; response_codes[1] = 2;
+                    fill_pattern_color = color:white;
+                    size = 800, 800;
+                }
+            }
+        }
+
+        HorGridLayout stimuli
+        {
+            init()
+            {
+                wrap_count = 2;
+                is_visible = false;
+            }
+
+            on_event:start()
+            {
+                regions_of_interests.reload();
+                int dt = int(now() - start_time);
+                eyetracker.print_to_data_file(start_time, "SYNCTIME " + string(dt));
+                eyetracker.print_to_data_file(start_time, string(dt) + " DISPLAY ON");
+            }
+
+            CanvasGadget image1canvas
+            {
+                init()
+                {
+                    size = 400, 400;
+                    offset_x = floor(width / 2);
+                    offset_y = floor(height / 2);
                 }
 
-                void highlight_regions()
+                ImageShape image1
                 {
-                    int index = 0;
-                    while(index<regions.size)
+                    init()
                     {
-                        regions[index].border_style = BORDER_DOTTED;
-                        regions[index].border = 5;
-                        regions[index].border_color = color:red;
-                        index++;
+                        is_visible=true;
                     }
                 }
+            }
 
-                CanvasGadget region1 {}
-                CanvasGadget region2 {}
-
-                void reload()
+            CanvasGadget image2canvas
+            {
+                init()
                 {
-                    copy_properties_from_to(stimuli.image1canvas, region1);
-                    copy_properties_from_to(stimuli.image2canvas, region2);
+                    size = 400, 400;
+                    offset_x = floor(width / 2);
+                    offset_y = floor(height / 2);
                 }
 
-                void copy_properties_from_to(GuiItem source, GuiItem target)
+                ImageShape image2
                 {
-                    target.x = source.x_abs;
-                    target.y = source.y_abs;
-                    target.width = source.width;
-                    target.height = source.height;
+                    init()
+                    {
+                        is_visible=true;
+                    }
                 }
             }
 
-            time start_stimulus(time t)
+            void load_all_images(string[] filenames)
             {
-                reset();
-
-                // Prepare stimulus presentation objects.
-                string[..] filenames;
-                filenames.size = 2;
-
-                filenames[LEFT] = item.image_filename1;
-                filenames[RIGHT] = item.image_filename2;
-
-                stimuli.load_all_images(filenames);
-
-                regions_of_interests.start(t);
-
-                 if(HIGHLIGHT_REGION_OF_INTEREST)
-                    regions_of_interests.highlight_regions();
-
-                // Start picture stimuli.
-                stimuli.start(t);
-
-                // Return stimulus onset time.
-                return stimuli.expected_start_time;
-            } 
-
-            void load_image_into(string filepath, ButtonGadget stim)
-            {
-                stim.fill_pattern_image = filepath;
-                stim.fill_pattern_offset_x = ( stim.width - image_width(filepath) ) /2;
-                stim.fill_pattern_offset_y = ( stim.height - image_height(filepath) ) /2;
+                load_image(image1canvas.image1, filenames[LEFT]);
+                load_image(image2canvas.image2, filenames[RIGHT]);
             }
 
-            void reset()
+            void load_image(ImageShape target_image, string filename)
             {
-                full_abort();
+                target_image.image = stimuli_dir() + "/images/" + filename;
 
-                regions_of_interests.is_visible = false;
-                stimuli.is_visible = false;
-            } 
+                target_image.x = floor(-target_image.actual_width / 2);
+                target_image.y = floor(-target_image.actual_height / 2);
+            }
+        }
+
+        FreeLayout regions_of_interests
+        {
+            CanvasGadget[..] regions;
+            int[..] response_codes;
+
+            init()
+            {
+                regions.size = 2;
+                response_codes.size = 2;
+                regions[0] = region1; response_codes[0] = 1;
+                regions[1] = region2; response_codes[1] = 2;
+            }
+
+            void highlight_regions()
+            {
+                int index = 0;
+                while(index<regions.size)
+                {
+                    regions[index].border_style = BORDER_DOTTED;
+                    regions[index].border = 5;
+                    regions[index].border_color = color:red;
+                    index++;
+                }
+            }
+
+            CanvasGadget region1 {}
+            CanvasGadget region2 {}
+
+            void reload()
+            {
+                copy_properties_from_to(stimuli.image1canvas, region1);
+                copy_properties_from_to(stimuli.image2canvas, region2);
+            }
+
+            void copy_properties_from_to(GuiItem source, GuiItem target)
+            {
+                target.x = source.x_abs;
+                target.y = source.y_abs;
+                target.width = source.width;
+                target.height = source.height;
+            }
+        }
+
+        time start_stimulus(time t)
+        {
+            reset();
+
+            // Prepare stimulus presentation objects.
+            string[..] filenames;
+            filenames.size = 2;
+
+            filenames[LEFT] = item.image_filename1;
+            filenames[RIGHT] = item.image_filename2;
+
+            stimuli.load_all_images(filenames);
+
+            regions_of_interests.start(t);
+
+             if(HIGHLIGHT_REGION_OF_INTEREST)
+                regions_of_interests.highlight_regions();
+
+            // Start picture stimuli.
+            stimuli.start(t);
+
+            // Return stimulus onset time.
+            return stimuli.expected_start_time;
+        } 
+
+        void load_image_into(string filepath, ButtonGadget stim)
+        {
+            stim.fill_pattern_image = filepath;
+            stim.fill_pattern_offset_x = ( stim.width - image_width(filepath) ) /2;
+            stim.fill_pattern_offset_y = ( stim.height - image_height(filepath) ) /2;
+        }
+
+        void reset()
+        {
+            full_abort();
+
+            regions_of_interests.is_visible = false;
+            stimuli.is_visible = false;
+        } 
     }
 
     Timer drift_check_timer
@@ -313,7 +313,6 @@ Page test_page
             rt = -9999;
             recalibrate = false;
         }
-
 
         void process_hit(int val, time t)
         {
@@ -414,7 +413,14 @@ Page test_page
             show_cursor();
     }
 
-    void quick_show_and_save_picture(Object caller, TestItem it, time tref, int count=-1, string output_directory = "/pictures", dur allowed_time_to_export = 500ms)
+    void quick_show_and_save_picture(
+        Object      caller,
+        TestItem    it,
+        time        tref,
+        int         count = -1,
+        string      output_directory = "/pictures",
+        dur         allowed_time_to_export = 500ms
+        )
     {
         item = it;
 
@@ -440,7 +446,7 @@ Page test_page
         {
             string fn = output_directory + string(item.type) + format(item.id,3) + ".png";
 
-             if(!file_exists(output_directory))
+            if(!file_exists(output_directory))
                 create_dir_tree(output_directory);
 
             println("Flying through to generate pictures of the screen and save it as:\n\t" + fn);
@@ -471,7 +477,7 @@ Page test_page
         // drift-check failure or abort we'll exit to do a recalibration.
         //SetupActionOrder(tref);
 
-         if (item.do_drift_check)
+        if (item.do_drift_check)
             drift_check_timer.start(tref);
         else 
             start_actual_presentation();
@@ -480,7 +486,12 @@ Page test_page
         test_page_overlay.update_progress_bar(count);
 
         // Update status line on control window. Cleared in done() above.
-        control.set_status(string(item.id) + "  " + string(item.sound_filename) + "  " + string(item.image_filename1) + "  " + string(item.image_filename2));
+        control.set_status(
+            string(item.id)                 + "  " +
+            string(item.sound_filename)     + "  " +
+            string(item.image_filename1)    + "  " +
+            string(item.image_filename2)
+            );
 
         // Remember who to signal when the trial is over.
         target = caller;
@@ -499,10 +510,20 @@ Page test_page
         // Response window starts at onset of the audio target with a possible shift. 
         dur response_delay = max( dur(item.target_onset) + RESPONSE_SHIFT, 0s);
 
-        if(RESPONSE_DURATION > 0s)
-           response.start(audstimonset + response_delay, audstimoffset + RESPONSE_DURATION); // auto paced
-        else
-             response.start(audstimonset + response_delay, RESPONSE_DURATION); // self paced
+        if(RESPONSE_DURATION > 0s) {
+            // auto paced
+            response.start(
+                audstimonset + response_delay,
+                audstimoffset + RESPONSE_DURATION
+                );
+        }
+        else {
+             // self paced
+            response.start(
+                audstimonset + response_delay,
+                RESPONSE_DURATION
+                );
+        }
 
         // Always measure relative to target onset.
         response.reference_time = audstimonset + dur(item.target_onset);
@@ -513,3 +534,4 @@ Page test_page
         return SELECT_ITEMS_BY_MOUSE;
     }
 }
+
