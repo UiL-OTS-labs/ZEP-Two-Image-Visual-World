@@ -35,11 +35,11 @@ Page test_page
     on_event:key_press()
     { 
         if (input_key == KEY_Shift_L)
-            response.process_hit(1, event_time);
+            response.process_hit(0, event_time);
         else if (input_key == KEY_Shift_R)
-            response.process_hit(2, event_time);
-        else if (input_key == KEY_Return || input_key == ' ')
             response.process_hit(1, event_time);
+        else if (input_key == KEY_Return || input_key == ' ')
+            response.process_hit(2, event_time);
         else if (!eyetracker.handle_key(input_key, input_modifiers)) 
             handle_special_key(this, input_key, input_modifiers);
     }
@@ -381,9 +381,20 @@ Page test_page
         // Enable button-box buttons.
         control.target = this;
         control.button_box.disable_buttons();
-        
-        control.button_box.enable_button(0,1);
-        control.button_box.enable_button(2,2);
+
+        // Enable the valid buttons to work with a three button box //
+        //                                                          //
+        //                                                          //
+        //       0                                          2       //
+        //                                                          //
+        //                             1                            //
+        //                                                          //
+        // So the left button (0) will be enabled to send a 0       //
+        // to the response object and the right button(2) will      //
+        // send a 1, whereas the middle button(1) will be ignored.  //
+
+        control.button_box.enable_button(0, 0);
+        control.button_box.enable_button(2, 1);
 
         if(!allow_selection_by_mouse())
             hide_cursor();
