@@ -517,7 +517,7 @@ Page test_page
         }
 
         // Always measure relative to target onset.
-        response.reference_time = audstimonset + dur(item.target_onset);
+        response.reference_time = audstimonset;
     }
 
     bool allow_selection_by_mouse()

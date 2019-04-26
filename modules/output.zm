@@ -11,7 +11,6 @@ record TestOutput
     bool        recorded_eye_movements; // if set, record eye movements
     bool        did_drift_check;
     string      sound_filename;         // sound stimulus filename
-    int         target_onset;           // onset of target in sentence
     string      image_filename1;        // image stimulus filename 1
     string      image_filename2;        // image stimulus filename 1
     int         expected_response;      // which response is the correct one
