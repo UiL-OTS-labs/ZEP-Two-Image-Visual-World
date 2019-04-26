@@ -4,7 +4,7 @@ const int       EXPERIMENT_VERSION              = 1;
 
 
 // Database number. Typically set to 1.
-const string       DATABASE_NUMBER                 = "1";
+const string    DATABASE_NUMBER                 = "1";
 
 
 // ID of default researcher.
@@ -38,22 +38,14 @@ const dur       INTERTRIAL_INTERVAL             = 1000ms;
 // Delay from drift-check to visual stimulus.
 const dur       DC_VISUAL_DELAY                 = 100ms;
 
-// Delay from visual stimulus onset to auditory stimulus.
-const dur       AUDITORY_DELAY                  = 750ms;
-
 // Delay between manual participant response and recording end.
-const dur       RECORD_EXTRA_AFTER_RESPONSE = 100ms;
-
-// Delay from auditory target onset to response interval. Negative means
-// allow responding before the target begins. 
-// The resulting shift will never be earlier than audio stimulus onset. 
-const dur       RESPONSE_SHIFT                  = -100ms;
+const dur       RECORD_EXTRA_AFTER_RESPONSE     = 100ms;
 
 // Duration of the response interval. A value of 0ms means there is no
 // timeout.
 //const dur       RESPONSE_DURATION               = 5000ms;       // auto-paced
 const dur       RESPONSE_DURATION               = 0ms;          // self-paced
 
-const bool	SELECT_ITEMS_BY_MOUSE = false;
+const bool	    SELECT_ITEMS_BY_MOUSE           = false;
 
-const bool	HIGHLIGHT_REGION_OF_INTEREST = false;
+const bool	    HIGHLIGHT_REGION_OF_INTEREST    = false;
