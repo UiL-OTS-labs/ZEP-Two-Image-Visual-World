@@ -47,12 +47,12 @@ HISTORY:
 
 \******************************************************************************/
 
-requires 1.16;
+requires 1.17;
 
 //standards:
 // Defaultly import std_windows1, but import std_windows1a when using the smi.
 import std_windows1;
-//import std_windows1a;
+//import std_windows1a; // Handy for the smi eyetracker
 
 import std_entry_page1;
 import std_exit_page1;
