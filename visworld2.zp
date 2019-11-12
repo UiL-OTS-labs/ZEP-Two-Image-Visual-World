@@ -79,6 +79,8 @@ Experiment experiment
         show_test_windows();
 
         control.button_box.open();
+        if (control.button_box.open() != OK)
+            println("Unable to open the button box.");
         control.button_box.enable_all_buttons(CONTINUE);
     }
 
